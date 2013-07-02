@@ -113,4 +113,4 @@ Examples
 
 ------- 
 License
-Unveil is licensed under the [MIT license](http://opensource.org/licenses/MIT).
+Unveil is licensed under the [MIT license](http://opensource.org/licenses/MIT). 
