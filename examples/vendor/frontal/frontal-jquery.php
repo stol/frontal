@@ -17,15 +17,22 @@
  *         ->fadeIn(".u-{$user_id} .tooltip")
  *         ->delay(3000)
  *         ->fadeOut(".u-{$user_id} .tooltip")
+ *     ->after()
+ *          ->remove()
  *     ->send();
+ *
+ * ex : 
  */
 
 class Frontal
 {
-    private static $instance = null;
-    private static $actions = array();
-    private static $selector = null;
+    private static $instance = null;   // The instance
+    private static $actions = array(); // An array of actions
+    private static $selector = null;   // Current selector
 
+    /**
+     * Returns the current instance
+     */
     public static function getInstance()
     {
         if (!self::$instance) {
@@ -35,13 +42,37 @@ class Frontal
         return self::$instance;
     }
 
+    /**
+     * Sets the current selector
+     */ 
     public function query($selector = null)
     {
         self::$selector = $selector;
         return self::$instance;
     }
 
+    /**
+     * Adds an action to the list
+     */ 
+    public function __call($name, $args)
+    {
+        self::$actions[] = array(
+            // the action is bound to the current selector.
+            // If the selector is null, the action will be bound to the previous selector
+            'selector' => self::$selector, 
+            'method'   => $name,
+            'args'     => $args
+        );
 
+        // Sets the selector for the next action to null, so the next action can stay bound to the current selector
+        self::$selector = null;
+
+        return $this;
+    }
+
+    /**
+     * Returns the current pile of actions, as an array of actions
+     */
     public function end($success = true)
     {
         return array(
@@ -50,6 +81,9 @@ class Frontal
         );
     }
 
+    /**
+     * Echos the current pile of actions, as a json encoded string
+     */ 
     public function send($success = true)
     {
 
@@ -60,26 +94,16 @@ class Frontal
         }
 
         echo json_encode($this->end($success));
-        self::clean();
     }
 
-
+    /**
+     * Re-init the instance
+     */
     private static function clean()
     {
         self::$actions = array();
         self::$instance = null;
-    }
-
-    public function __call($name, $args)
-    {
-        self::$actions[] = array(
-            'selector' => self::$selector,
-            'method'   => $name,
-            'args'     => $args
-        );
-
         self::$selector = null;
-
-        return $this;
     }
+
 }

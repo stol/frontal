@@ -16,6 +16,11 @@ $app->get('/', function (){
 	return get_include_contents("../views/index.php");
 });
 
+
+/**
+ * Adds a <ul> list item after the title of the first box
+ * and removes the action button
+ */
 $app->get('/samples/1', function () use ($app){
 
  	return $app->json(
@@ -27,6 +32,8 @@ $app->get('/samples/1', function () use ($app){
 			->end()
 	);
 });
+
+
 
 
 // definitions
