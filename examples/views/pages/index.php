@@ -18,14 +18,8 @@
     </div>
     <div class="span4 sample-box-2">
         <h2>Infinite pagination</h2>
-        <ul>
-            <li>Item 1</li>
-            <li>Item 2</li>
-            <li>Item 3</li>
-            <li>Item 4</li>
-            <li>Item 5</li>
-        </ul>
-        <p><a class="btn sample-read-more" href="samples/2?page=2" data-p-ajaxify="1">Display 5 more</a></p>
+        <h3>(initial loading is async)</h3>
+        <!-- Content is loaded async. See main.js-->
    </div>
     <div class="span4 sample-box-3">
         <h2>Loading</h2>
@@ -36,7 +30,7 @@
 <hr>
 
 <footer>
-    <p>&copy; Company 2012</p>
+    <p>&copy; frontal 2013</p>
 </footer>
 
 

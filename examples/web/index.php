@@ -61,13 +61,12 @@ $app->get('/samples/2', function (Request $request) use ($app) {
 
 	// 4/ Ajax request ? Adds the items to the existing list, using frontal
 	$response = Frontal::getInstance()
-		->query('.sample-box-2 .sample-read-more')
-			->remove()
-		->query('.sample-box-2 ul')->last()
-		->after($content);
-
+		->query('.sample-box-2')
+		->append($content)
+		->query('.sample-box-2 .js-sample-read-more.js-loading')->parent()
+		->remove();
+			 
  	return $app->json($response->toArray());
-
 });
 
 

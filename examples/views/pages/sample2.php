@@ -13,6 +13,6 @@
 <?php if ($page >= 3) : ?>
     <p>Max page reached !</p>
 <?php else : ?>
-    <p><a class="btn sample-read-more" href="samples/2?page=<?php echo $page +1 ?>" data-p-ajaxify="1">Display 5 more</a></p>
+    <p><a class="btn js-sample-read-more" href="samples/2?page=<?php echo $page +1 ?>" data-p-ajaxify="1">Display 5 more</a></p>
 <?php endif ?>
 
