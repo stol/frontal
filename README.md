@@ -6,6 +6,10 @@ Control your javascript interactions from the server.
 Your frontend application logic is handled server side.
 
 
+### Examples
+
+Clone this repository, then navigate to /frontal/web/
+
 ### Basic use
 
 The following link should work without JS. But with frontal.js and the appropriate server response, ajax magic should happend !

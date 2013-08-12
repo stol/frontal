@@ -1,0 +1,3 @@
+;(function($){
+    frontal.listen();
+})(jQuery);
