@@ -73,7 +73,7 @@ class Frontal
     /**
      * Returns the current pile of actions, as an array of actions
      */
-    public function end($success = true)
+    public function toArray($success = true)
     {
         return array(
             "success" => $success,
@@ -93,7 +93,7 @@ class Frontal
             header('Content-Type: application/json; charset=UTF-8');
         }
 
-        echo json_encode($this->end($success));
+        echo json_encode($this->toArray($success));
     }
 
     /**

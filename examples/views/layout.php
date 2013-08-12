@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html class="no-js">
     <head>
+        <base href="/frontal/examples/web/">
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title></title>
+        <title>frontal samples</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 
@@ -50,11 +51,6 @@
                                 </ul>
                             </li>
                         </ul>
-                        <form class="navbar-form pull-right">
-                            <input class="span2" type="text" placeholder="Email">
-                            <input class="span2" type="password" placeholder="Password">
-                            <button type="submit" class="btn">Sign in</button>
-                        </form>
                     </div><!--/.nav-collapse -->
                 </div>
             </div>
@@ -62,46 +58,12 @@
 
         <div class="container">
 
-            <!-- Main hero unit for a primary marketing message or call to action -->
-            <!--div class="hero-unit">
-                <h1>frontal.js</h1>
-                <p>Drive your javascript interactions from server side!</p>
-                <p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p>
-
-            </div-->
-
-            <div class="hero-unit">
-                <h1>Examples</h1>
-            </div>
-
-            <!-- Example row of columns -->
-            <div class="row">
-                <div class="span4 sample-box-1">
-                    <h2>Load some items in this box</h2>
-                    <p><a class="btn" href="samples/1" data-p-ajaxify="1">Load items</a></p>
-                </div>
-                <div class="span4">
-                    <h2>Heading</h2>
-                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                    <p><a class="btn" href="#">View details &raquo;</a></p>
-               </div>
-                <div class="span4">
-                    <h2>Heading</h2>
-                    <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-                    <p><a class="btn" href="#">View details &raquo;</a></p>
-                </div>
-            </div>
-
-            <hr>
-
-            <footer>
-                <p>&copy; Company 2012</p>
-            </footer>
+		<?php echo $content ?>
 
         </div> <!-- /container -->
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
+        <script>window.jQuery || document.write('<script src="/js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
 
         <script src="js/vendor/bootstrap.min.js"></script>
 
@@ -109,3 +71,4 @@
         <script src="js/main.js"></script>
     </body>
 </html>
+

@@ -1,22 +1,8 @@
-
-
-/* ==========================================================================
-   Author's custom styles
-   ========================================================================== */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.btn.js-loading{
+	background-image: url(../img/ajax-loader.gif);
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	text-indent: -1000%;
+	white-space: nowrap;
+	overflow: hidden;
+}
