@@ -180,8 +180,10 @@
                 // Is it a jQuery method bases on a selector ?
                 if ($.fn[action.method]){
                     $query = action.selector ? $(action.selector) : $query;
-                    $query = $query[action.method].apply($query, action.args);
-
+                    // Pour le cas où le 1er call ne contient pas de selecteur;
+                    $query = $query
+                        ? $query[action.method].apply($query, action.args)
+                        : $()[action.method].apply($, action.args);
                 }
                 // Or a method without selector ?
                 else if ($[action.method]){
