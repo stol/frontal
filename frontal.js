@@ -8,9 +8,9 @@
 
         function listen(options){ 
             $(document)
-                .on("click", ":not(form)[type=submit], :not(form)[data-p-ajaxify]", handleEvent)
-                .on("submit", "form[data-p-ajaxify]", handleEvent)
-                .on("mouseenter", ":not(form)[type=submit], :not(form)[data-p-ajaxify]", handleEvent)
+                .on("click", ":not(form)[type=submit], :not(form)[data-f-ajaxify]", handleEvent)
+                .on("submit", "form[data-f-ajaxify]", handleEvent)
+                .on("mouseenter", ":not(form)[type=submit], :not(form)[data-f-ajaxify]", handleEvent)
 
             $.extend(settings, options);
         }
@@ -27,34 +27,34 @@
             var elem  = e.currentTarget,
                 $elem = $(elem)
 
-            // It's a button, and not inside a form[data-p-ajaxify], do nothing
-            if ($elem.is("[type=submit]") && !$elem.parents("form[data-p-ajaxify]")[0]){
+            // It's a button, and not inside a form[data-f-ajaxify], do nothing
+            if ($elem.is("[type=submit]") && !$elem.parents("form[data-f-ajaxify]")[0]){
                 return;
             }
 
             // If event is a mouseenter, but there is not hover directive, do nothing 
-            if (e.type == "mouseenter" && !$elem.attr("data-p-hover")){
+            if (e.type == "mouseenter" && !$elem.attr("data-f-hover")){
                 return;
             }
 
             // Get the instructions
-            var ajaxify = $elem.attr("data-p-ajaxify") || null,
-                href    = $elem.attr("data-p-href") || $elem.attr("href") || $elem.attr("action"),
-                loading = $elem.attr("data-p-loading") || null,
-                uniq    = $elem.attr("data-p-uniq") || null,
-                confirm = $elem.attr("data-p-confirm") || null,
-                stop    = $elem.attr("data-p-stop") || null,
-                toggle  = $elem.attr("data-p-toggle") || null,
+            var ajaxify = $elem.attr("data-f-ajaxify") || null,
+                href    = $elem.attr("data-f-href") || $elem.attr("href") || $elem.attr("action"),
+                loading = $elem.attr("data-f-loading") || null,
+                uniq    = $elem.attr("data-f-uniq") || null,
+                confirm = $elem.attr("data-f-confirm") || null,
+                stop    = $elem.attr("data-f-stop") || null,
+                toggle  = $elem.attr("data-f-toggle") || null,
                 $form   = null,
-                method  = $elem.attr("data-p-method") || null,
+                method  = $elem.attr("data-f-method") || null,
                 e_type  = e.type;
             
             // A submit button/input has been clicked ? We find the main context
             if ($elem.is("[type=submit]")) {
-                $form   = $elem.parents("form[data-p-ajaxify]").first();
+                $form   = $elem.parents("form[data-f-ajaxify]").first();
                 href    = href || $form.attr("action");
-                ajaxify = $form.attr("data-p-ajaxify");
-                confirm = confirm || $elem.attr("data-p-confirm");
+                ajaxify = $form.attr("data-f-ajaxify");
+                confirm = confirm || $elem.attr("data-f-confirm");
             }
 
             // The main command is 0 ? Stop event propagation and stop there,
@@ -107,7 +107,7 @@
             showActivity(elem, loading);
 
             // Set the state to 0, so the action won't be executed twice
-            $elem.attr("data-p-ajaxify", "0")
+            $elem.attr("data-f-ajaxify", "0")
 
             // Retrieve data to be sent to the server
             if ($elem.is("form")){
@@ -134,13 +134,13 @@
                 handleResponse(response);
                 if ($elem.is("form") && toggle && response.success) {
                     var $ori = $elem.find(".js-loading");
-                    $elem.find("[type=submit]").attr("data-p-stop", "")
-                        .filter(".js-loading").attr("data-p-stop", "1")
+                    $elem.find("[type=submit]").attr("data-f-stop", "")
+                        .filter(".js-loading").attr("data-f-stop", "1")
                 }
             }
             // Callback in any case, success or error
             var callback_always = function(){
-                $elem.attr("data-p-ajaxify", uniq ? null : "1");
+                $elem.attr("data-f-ajaxify", uniq ? null : "1");
                 $elem.is("form") && $elem.find(".js-injected").remove();
                 hideActivity(elem);
                 if (e_type == "mouseenter")

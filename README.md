@@ -5,16 +5,15 @@ Control your javascript interactions from the server.
 
 Your frontend application logic is handled server side.
 
+## Frontal VS Traditionnal way comparison
 
-### Compared to traditionnal ajax handling
+### Traditional way : ajax controller is frontend (example with jquery)
 
-**Traditional ajax (using jQuery) to load a list after a link :**
-
-*(To be repeated for each ajax load link on the site)*
-
-```
-<!-- REPEAT CODE BELOW FOR EVERY AJAX ACTION OF THE SITE… GOSH -->
-<a href="#" class="link">Display a list bellow</a>
+```html
+<!--
+  -- REPEAT CODE BELOW FOR EVERY AJAX ACTION OF THE SITE… SIGH !
+  -->
+<a href="#" class="some-link">Display a list bellow</a>
 <script>
 $(".link").on("click", function(e){
     var $link = $(this);
@@ -30,7 +29,7 @@ $(".link").on("click", function(e){
 	// Add loading state
 	$link.addClass("loading").text("Loading…");
     $.ajax({
-        url: "/getlist.php",
+        url: "/some-url.php",
     }).done(function(response) {
     	// Response error ? Revert to initial state
     	if (response.error){
@@ -53,20 +52,12 @@ $(".link").on("click", function(e){
     });
 });
 </script>
-
 ```
 
-
-### Examples
-
-Clone this repository, then navigate to /frontal/web/
-
-### Basic use
-
-The following link should work without JS. But with frontal.js and the appropriate server response, ajax magic should happend !
+### Frontal way (with jQuery PHP adapter)
 
 ```html
-<a class="some-link" href="/some-url.php" data-p-ajaxify="1">Show me the data</a>
+<a href="/some-url.php" class="some-link" data-f-ajaxify="1">Display a list bellow</a>
 ```
 
 And pseudo code, server side
@@ -75,23 +66,24 @@ And pseudo code, server side
 function someControllerAction()
 {
     // Main content of the page
-    $viewContent = render('/some-view.tpl');
+    $renderedHtml = render('/some-view.tpl');
 
     // If ajax, add content after the link, and remove the link 
     if ($request->isAjax(){
         // Call to a php wrapper, generating json instructions
         Frontal::getInstance()
             ->query(".some-link")
-            ->after($viewContent)
+            ->after($renderedHtml)
             ->remove()
         ->send(); // => Does exit
     }
     
     // Otherwise, render the page normally
-    $layout->set('content', $viewContent);
+    $layout->set('content', $renderedHtml);
     $layout->render();
 }
 ```
+
 
 Voilà !
 
@@ -101,43 +93,41 @@ If it's an ajax call, the server sends a json string, containing the instruction
 
 So the logic stays on the server. No need to edit any JS file. All the templating is done server side.
 
-How it works
-------- 
+## How it works
 
 ### Click
 
-When clicking on any element, frontal is triggered IF data-p-ajaxify is present.
+When clicking on any element, frontal is triggered IF data-f-ajaxify is present.
 
-If the element clicked is a link, it sends an ajax request to the url specified in href attribute, or to the url specified in the data-p-href attribute (if present).
+If the element clicked is a link, it sends an ajax request to the url specified in href attribute, or to the url specified in the data-f-href attribute (if present).
 
-If the element clicked is a [type=submit] button/input inside a form with data-p-ajaxify, the button is cloned as an hidden field, the click event canceled so the submit event can happen.
+If the element clicked is a [type=submit] button/input inside a form with data-f-ajaxify, the button is cloned as an hidden field, the click event canceled so the submit event can happen.
 
 ### Submit
 
-When submiting a form, if is has the class data-p-ajaxify, the form is sent via an ajax request
+When submiting a form, if it has the class ``data-f-ajaxify``, the form is sent via an ajax request
 
 ### Hover
 
 When clicking en element, if it's a submit input/button, 
 
-Attributes API
-------- 
+### Attributes API (namespaced with "data-f-xxx)
 
 <table>
     <tr><th>Attribute</th><th>Value</th><th>Description</th></tr>
-    <tr><td>data-p-ajaxify</td><td>1|0</td><td>Triggers frontal for the tag</td></tr>
-    <tr><td>data-p-href</td><td>url</td><td>Forces the url for the ajax request</td></tr>
-    <tr><td>data-p-hover</td><td>1|0</td><td>Triggers the ajax call on hover</td></tr>
-    <tr><td>data-p-loading</td><td>spinner|selector</td><td>spinner: adds a spinner to the page<br/>selector: adds class js-loading to the element(s) matching the css selector</td></tr>
-    <tr><td>data-p-uniq</td><td>1|0</td><td>Frontal will only run once</td></tr>
-    <tr><td>data-p-confirm</td><td>string</td><td>Display a confirm alertbox before sending the request</td></tr>
-    <tr><td>data-p-stop</td><td>1|0</td><td>Stops Triggers frontal for the tag</td></tr>
-    <tr><td>data-p-toggle</td><td>1|0</td><td>Can't remember :p</td></tr>
-    <tr><td>data-p-method</td><td>post|get</td><td>Forces the request method</td></tr>
+    <tr><td>data-f-ajaxify</td><td>1|0</td><td>Triggers frontal for the tag</td></tr>
+    <tr><td>data-f-href</td><td>url</td><td>Forces the url for the ajax request</td></tr>
+    <tr><td>data-f-hover</td><td>1|0</td><td>Triggers the ajax call on hover</td></tr>
+    <tr><td>data-f-loading</td><td>spinner|selector</td><td>spinner: adds a spinner to the page<br/>selector: adds class js-loading to the element(s) matching the css selector</td></tr>
+    <tr><td>data-f-uniq</td><td>1|0</td><td>Frontal will only run once</td></tr>
+    <tr><td>data-f-confirm</td><td>string</td><td>Display a confirm alertbox before sending the request</td></tr>
+    <tr><td>data-f-stop</td><td>1|0</td><td>Stops Triggers frontal for the tag</td></tr>
+    <tr><td>data-f-toggle</td><td>1|0</td><td>Can't remember :p</td></tr>
+    <tr><td>data-f-method</td><td>post|get</td><td>Forces the request method</td></tr>
 </table>
 
-Examples
-------- 
+### Examples
+
 
 **Sending a form :**
 
@@ -145,33 +135,39 @@ Examples
 - non-ajax if "Send normal" is clicked
 
 ```html
-<form action="/action.php" method="post" data-p-ajaxify="1">
+<form action="/action.php" method="post" data-f-ajaxify="1">
     <input type="text" name="name" placeholder="Type your name"/>
     <!-- Will trigger frontal -->
     <button type="submit">Send ajax</button>
-    <!--Will send normally, because of data-p-stop="1" -->
-    <button type="submit" data-p-stop="1">Send normal</button>
+    <!--Will send normally, because of data-f-stop="1" -->
+    <button type="submit" data-f-stop="1">Send normal</button>
 </form>
 ```
 
 **Sending a form with an alert**
+
 ```html
-<form action="/action.php" method="post" data-p-ajaxify="1" data-p-confirm="Are you sure ?">
+<form action="/action.php" method="post" data-f-ajaxify="1" data-f-confirm="Are you sure ?">
     <button type="submit">Delete</button>
 </form>
 ```
 
 **Hovering, only once, with force url**
+
 ```html
-<a href="/user/42" data-p-ajaxify="1" data-p-hover="1" data-p-uniq="1" data-p-href="/user/42/card">User 42 (hover for more info)</a>
+<a href="/user/42" data-f-ajaxify="1" data-f-hover="1" data-f-uniq="1" data-f-href="/user/42/card">User 42 (hover for more info)</a>
 ```
-### TODO
 
-* Create a native core
-* Create a jquery adapter
-* Create a native adapter
+### Examples
 
+Clone this repository, then navigate to /frontal/web/
+
+### ROADMAP
+
+* Create a native frontend core
+* Create a jQuery adapter (front & back)
+* Improve doc
+* Make tests
 
 ------- 
-License
-Unveil is licensed under the [MIT license](http://opensource.org/licenses/MIT). 
+frontal.js is licensed under the [MIT license](http://opensource.org/licenses/MIT). 
