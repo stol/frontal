@@ -93,6 +93,14 @@ If it's an ajax call, the server sends a json string, containing the instruction
 
 So the logic stays on the server. No need to edit any JS file. All the templating is done server side.
 
+## Inspiration
+
+frontal.js was inspired by facebook "primer", explained in a [frontend talk in 2010](https://www.facebook.com/video/video.php?v=596368660334).
+
+Recently, 37signals made a blog post of [Server-generated JavaScript Responses](http://37signals.com/svn/posts/3697-server-generated-javascript-responses) similar to frontal.js
+
+I used frontal.js for several years in various projects. It did remove many javascript code, unified templates, and is declarative, as it's commonly approved thoses days.
+
 ## How it works
 
 ### Click
@@ -158,7 +166,7 @@ When clicking en element, if it's a submit input/button,
 <a href="/user/42" data-f-ajaxify="1" data-f-hover="1" data-f-uniq="1" data-f-href="/user/42/card">User 42 (hover for more info)</a>
 ```
 
-### Examples
+### Full examples 
 
 Clone this repository, then navigate to /frontal/web/
 
