@@ -6,6 +6,57 @@ Control your javascript interactions from the server.
 Your frontend application logic is handled server side.
 
 
+### Compared to traditionnal ajax handling
+
+**Traditional ajax (using jQuery) to load a list after a link :**
+
+*(To be repeated for each ajax load link on the site)*
+
+```
+<!-- REPEAT CODE BELOW FOR EVERY AJAX ACTION OF THE SITE… GOSH -->
+<a href="#" class="link">Display a list bellow</a>
+<script>
+$(".link").on("click", function(e){
+    var $link = $(this);
+    
+    // No default action
+    e.preventDefault(); 
+    
+    // Is the link already loading ?
+    if( $(this).is(".loading") ){
+		alert("Ajax request is already launched !")
+		return;
+	}
+	// Add loading state
+	$link.addClass("loading").text("Loading…");
+    $.ajax({
+        url: "/getlist.php",
+    }).done(function(response) {
+    	// Response error ? Revert to initial state
+    	if (response.error){
+    		alert("An error occured while loading list");
+			$link.removeClass("loading").text("Display a list below");
+    		return;
+    	}
+    	// Else, build HTML with data retrieved
+    	var ul = '<ul>';    
+    	for(var i=0; i<response.length; i++){
+    		ul+= '<li>List item :'+response[i]+'</li>';
+    	}
+    	ul+= '</ul>';
+    	
+    	// Insert it after the link
+    	$link.after("<ul>");
+    
+    	// remove the loading link
+        $link.replaceWith("<span>List loaded below :</span>");
+    });
+});
+</script>
+
+```
+
+
 ### Examples
 
 Clone this repository, then navigate to /frontal/web/
@@ -114,6 +165,12 @@ Examples
 ```html
 <a href="/user/42" data-p-ajaxify="1" data-p-hover="1" data-p-uniq="1" data-p-href="/user/42/card">User 42 (hover for more info)</a>
 ```
+### TODO
+
+* Create a native core
+* Create a jquery adapter
+* Create a native adapter
+
 
 ------- 
 License
