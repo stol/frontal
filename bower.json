@@ -1,23 +1,23 @@
 {
-  "name": "frontal",
-  "main": "frontal.js",
-  "version": "0.5",
-  "homepage": "https://github.com/Stol/frontal",
-  "authors": [
-    "Stol <lordstol@hotmail.fr>"
-  ],
-  "description": "Handle your ajax response from the server. Not from front JS controllers.",
-  "keywords": [
-    "ajax",
-    "jquery",
-    "performance"
-  ],
-  "license": "MIT",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ]
+    "name": "frontal",
+    "main": "frontal.js",
+    "version": "0.5.1",
+    "homepage": "https://github.com/Stol/frontal",
+    "authors": [
+        "Stol <lordstol@hotmail.fr>"
+    ],
+    "description": "Handle your ajax response from the server. Not from front JS controllers.",
+    "keywords": [
+        "ajax",
+        "jquery",
+        "performance"
+    ],
+    "license": "MIT",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ]
 }

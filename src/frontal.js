@@ -10,7 +10,7 @@
             $(document)
                 .on("click", ":not(form)[type=submit], :not(form)[data-f-ajaxify]", handleEvent)
                 .on("submit", "form[data-f-ajaxify]", handleEvent)
-                .on("mouseenter", ":not(form)[type=submit], :not(form)[data-f-ajaxify]", handleEvent)
+                .on("mouseenter", ":not(form)[type=submit], :not(form)[data-f-ajaxify]", handleEvent);
 
             $.extend(settings, options);
         }
@@ -25,7 +25,7 @@
         function handleEvent(e)
         {
             var elem  = e.currentTarget,
-                $elem = $(elem)
+                $elem = $(elem);
 
             // It's a button, and not inside a form[data-f-ajaxify], do nothing
             if ($elem.is("[type=submit]") && !$elem.parents("form[data-f-ajaxify]")[0]){
@@ -107,15 +107,16 @@
             showActivity(elem, loading);
 
             // Set the state to 0, so the action won't be executed twice
-            $elem.attr("data-f-ajaxify", "0")
+            $elem.attr("data-f-ajaxify", "0");
 
+            var data;
             // Retrieve data to be sent to the server
             if ($elem.is("form")){
-                var data = $elem.serializeArray();
+                data = $elem.serializeArray();
                 data.push({name:"__ajax__", value: 1});
             }
             else {
-                var data = {__ajax__: 1};
+                data = {__ajax__: 1};
             }
             
             // Ajax call settings
@@ -135,9 +136,10 @@
                 if ($elem.is("form") && toggle && response.success) {
                     var $ori = $elem.find(".js-loading");
                     $elem.find("[type=submit]").attr("data-f-stop", "")
-                        .filter(".js-loading").attr("data-f-stop", "1")
+                        .filter(".js-loading").attr("data-f-stop", "1");
                 }
-            }
+            };
+
             // Callback in any case, success or error
             var callback_always = function(){
                 $elem.attr("data-f-ajaxify", uniq ? null : "1");
@@ -146,7 +148,7 @@
                 if (e_type == "mouseenter")
                     $elem.trigger("mouseenter");
 
-            }
+            };
 
             // Do we have a user custom function to call before ajax ?
             settings.onBeforeAjax
@@ -170,7 +172,7 @@
 
             var actions = $.isArray(response.actions) ? response.actions : [response.actions];
 
-            var $query = null
+            var $query = null,
                 action = null;
 
             // Loop on each action
@@ -183,7 +185,8 @@
                     // Pour le cas où le 1er call ne contient pas de selecteur;
                     $query = $query
                         ? $query[action.method].apply($query, action.args)
-                        : $()[action.method].apply($, action.args);
+                        : $()[action.method].apply($, action.args)
+                    ;
                 }
                 // Or a method without selector ?
                 else if ($[action.method]){
@@ -195,12 +198,12 @@
                     switch(action.method) {
                         case 'redirect':
                             document.location.href = action.args; // Args = url
-                        break
+                            break;
                     }
                 }
             }
 
-            $(document).trigger("contentchange")
+            $(document).trigger("contentchange");
             return;
 
         }
@@ -254,8 +257,7 @@
             if ($loading){
                 $loading.hide();
             }
-                
-        };
+        }
 
 
         /**
@@ -265,13 +267,13 @@
             ajaxify: ajaxify,              // Fire ajax call
             listen : listen,               // Start listening to clics/submits/hovers
             handleResponse: handleResponse // Handles server reponses
-        }
+        };
 
     });
 }(typeof define === 'function' && define.amd ? define : function (deps, factory) {
     if (typeof module !== 'undefined' && module.exports) {
         module.exports = factory(require(deps[0]));
     } else {
-        window['frontal'] = factory(window['jQuery']);
+        window.frontal = factory(window.jQuery);
     }
 }));

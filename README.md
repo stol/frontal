@@ -93,9 +93,19 @@ If it's an ajax call, the server sends a json string, containing the instruction
 
 So the logic stays on the server. No need to edit any JS file. All the templating is done server side.
 
+## Installation
+
+via bower : 
+
+    $ bower install frontal
+
+via git :
+
+    $ git clone https://github.com/Stol/frontal
+    
 ## Inspiration
 
-frontal.js was inspired by facebook "primer", explained in a [frontend talk in 2010](https://www.facebook.com/video/video.php?v=596368660334).
+frontal.js was inspired by facebook "primer", detailed in a [frontend talk in 2010](https://www.facebook.com/video/video.php?v=596368660334).
 
 Recently, 37signals made a blog post of [Server-generated JavaScript Responses](http://37signals.com/svn/posts/3697-server-generated-javascript-responses) similar to frontal.js
 
