@@ -132,7 +132,7 @@
 
             // Callback when the call was successful
             var callback_done = function(response) {
-                handleResponse(response);
+                handleResponse(response, $elem);
                 if ($elem.is("form") && toggle && response.success) {
                     var $ori = $elem.find(".js-loading");
                     $elem.find("[type=submit]").attr("data-f-stop", "")
@@ -163,7 +163,9 @@
         /**
          * Server responses handler 
          */
-        function handleResponse(response) {
+        function handleResponse(response, $elem) {
+            $elem = $elem || null;
+
             if (typeof response == "string")
                 response = JSON.parse(response);
             
@@ -181,7 +183,14 @@
 
                 // Is it a jQuery method bases on a selector ?
                 if ($.fn[action.method]){
-                    $query = action.selector ? $(action.selector) : $query;
+                    // We can retrieve original event target
+                    if ($elem && action.selector === "this" ){
+                        $query = $elem;
+                    }
+                    else if (action.selector){
+                        $query = $(action.selector);
+                    }
+
                     // Pour le cas où le 1er call ne contient pas de selecteur;
                     $query = $query
                         ? $query[action.method].apply($query, action.args)
