@@ -19,9 +19,9 @@
         /**
          * Click/hover/submit handler
          * Event target is : 
-         *     - a button/input if the event is click
-         *     - a form if the event is submit
-         *     - anything if the event is hover
+         *     - if event is click : anything but a form
+         *     - if event is submit : a form
+         *     - if event is mouseenter : anything
          */ 
         function handleEvent(e)
         {
@@ -50,7 +50,7 @@
                 method  = $elem.attr("data-f-method") || null,
                 e_type  = e.type;
             
-            // A submit button/input has been clicked ? We find the main context
+            // A submit button/input has been clicked ? Let's find the relative form
             if ($elem.is("[type=submit]")) {
                 $form   = $elem.closest("form[data-f-ajaxify]");
                 href    = href || $form.attr("action");
@@ -58,15 +58,16 @@
                 confirm = confirm || $elem.attr("data-f-confirm");
             }
 
-            // The main command is 0 ? Stop event propagation and stop there,
-            // to let the time to the previous action to finish
-            if (ajaxify === "0") {
-                e.preventDefault();
+            // No action url provided ? Do nothing
+            if (!href) {
                 return;
             }
 
-            // No action url provided ? Do nothing
-            if (!href) {
+            // The main command is 0 ? Stop event propagation and stop there,
+            // to let the time to the previous action to finish
+            // (to prevent multiple clics)
+            if (ajaxify === "0") {
+                e.preventDefault();
                 return;
             }
 
@@ -96,7 +97,7 @@
                 return;
             }
 
-            // Forms actions should be posts
+            // Forms actions should be posts. YES THEY SHOULD :p
             if ($elem.is("form")){
                 method = "post";
             }
