@@ -8,9 +8,10 @@
 
         function listen(options){ 
             $(document)
-                .on("click", ":not(form)[type=submit], :not(form)[data-f-ajaxify]", handleEvent)
-                .on("submit", "form[data-f-ajaxify]", handleEvent)
-                .on("mouseenter", ":not(form)[type=submit], :not(form)[data-f-ajaxify]", handleEvent);
+                // check click for anything with data-f-hover, or submit button
+                .on("click", "[data-f-ajaxify]:not(form), [type=submit]", handleEvent)
+                // check submit and hover for data-f-ajaxify elems
+                .on("submit mouseenter", "[data-f-ajaxify]", handleEvent);
 
             $.extend(settings, options);
         }
