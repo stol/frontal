@@ -28,7 +28,7 @@
                 $elem = $(elem);
 
             // It's a button, and not inside a form[data-f-ajaxify], do nothing
-            if ($elem.is("[type=submit]") && !$elem.parents("form[data-f-ajaxify]")[0]){
+            if ($elem.is("[type=submit]") && !$elem.closest("form[data-f-ajaxify]")[0]){
                 return;
             }
 
@@ -51,7 +51,7 @@
             
             // A submit button/input has been clicked ? We find the main context
             if ($elem.is("[type=submit]")) {
-                $form   = $elem.parents("form[data-f-ajaxify]").first();
+                $form   = $elem.closest("form[data-f-ajaxify]");
                 href    = href || $form.attr("action");
                 ajaxify = $form.attr("data-f-ajaxify");
                 confirm = confirm || $elem.attr("data-f-confirm");
