@@ -142,6 +142,7 @@ When clicking en element, if it's a submit input/button,
     <tr><td>data-f-stop</td><td>1|0</td><td>Stops Triggers frontal for the tag</td></tr>
     <tr><td>data-f-toggle</td><td>1|0</td><td>Can't remember :p</td></tr>
     <tr><td>data-f-method</td><td>post|get</td><td>Forces the request method</td></tr>
+    <tr><td>data-f-register</td><td>[url]</td><td>[url] will be ajaxified once frontal.listen() is called</td></tr>
 </table>
 
 ### Examples
@@ -186,6 +187,9 @@ Clone this repository, then navigate to /frontal/web/
 * Create a jQuery adapter (front & back)
 * Improve doc
 * Make tests
+
+### Changelog
+0.6 : added data-f-register
 
 ------- 
 frontal.js is licensed under the [MIT license](http://opensource.org/licenses/MIT). 

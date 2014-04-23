@@ -1,5 +1,5 @@
 /**
- * frontal.js 0.5.5
+ * frontal.js 0.6
  *
  * The MIT License (MIT)
  * 
@@ -39,6 +39,18 @@
                 .on("submit mouseenter", "[data-f-ajaxify]", handleEvent);
 
             $.extend(settings, options);
+
+            catchUp();
+        }
+
+        /**
+         * Get elements with data-f-register="URL"
+         * and "ajaxifies" the URL
+         */
+        function catchUp(){
+            $("[data-f-register]").each(function(i, elem){
+                ajaxify($(elem).attr('data-f-register'), $(elem));
+            });
         }
 
         /**
@@ -248,9 +260,9 @@
          * Public method to fire an ajax call, with frontal handling the server response
          * Ex : frontal.ajaxify("une/url/avec/index.php");
          */
-        function ajaxify(url){
+        function ajaxify(url, $elem){
             $.get(url, function(response) {
-                handleResponse(response);
+                handleResponse(response, $elem);
             });
         }
 
