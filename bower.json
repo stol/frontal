@@ -1,7 +1,7 @@
 {
     "name": "frontal",
     "main": "frontal.js",
-    "version": "0.6.0",
+    "version": "0.6.1",
     "homepage": "https://github.com/Stol/frontal",
     "authors": [
         "Stol <lordstol@hotmail.fr>"
