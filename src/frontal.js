@@ -1,5 +1,5 @@
 /**
- * frontal.js 0.6.1
+ * frontal.js 0.6.2
  *
  * The MIT License (MIT)
  * 
@@ -169,9 +169,7 @@
             };
 
 
-            // Callback when the call was successful
-            var callback_done = function(response) {
-                handleResponse(response, $elem);
+            var callback_common = function(response){
                 if ($elem.is("form") && toggle && response.success) {
                     var $ori = $elem.find(".js-loading");
                     $elem.find("[type=submit]").attr("data-f-stop", "")
@@ -179,20 +177,31 @@
                 }
             };
 
+            // Callback when the call was successful
+            var callback_done = function(response) {
+                handleResponse(response, $elem);
+                callback_common(response);
+            };
+
+            // Callback when the call has server error 
+            var callback_fail = function(jqXHR) {
+                var response = jqXHR.responseJSON;
+                handleResponse(response, $elem);
+                callback_common(response);
+            };
+
             // Callback in any case, success or error
             var callback_always = function(){
                 $elem.attr("data-f-ajaxify", uniq ? null : "1");
                 $elem.is("form") && $elem.find(".js-injected").remove();
                 hideActivity(elem);
-                if (e_type == "mouseenter")
-                    $elem.trigger("mouseenter");
-
+                e_type == "mouseenter" && $elem.trigger("mouseenter");
             };
 
             // Do we have a user custom function to call before ajax ?
             settings.onBeforeAjax
                 ? settings.onBeforeAjax(ajax_settings, callback_done, callback_always)
-                : $.ajax(ajax_settings).done(callback_done).always(callback_always)
+                : $.ajax(ajax_settings).done(callback_done).fail(callback_fail).always(callback_always)
             ;
 
             // Finaly, cancel default form submit, so frontal can handle it
