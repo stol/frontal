@@ -271,7 +271,7 @@
          */
         function ajaxify(url, $elem, method){
             method = method || 'get';
-            $.ajax({
+            return $.ajax({
                 url: url,
                 type: method,   
                 xhrFields: {
