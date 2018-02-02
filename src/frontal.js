@@ -46,6 +46,18 @@ export class Frontal {
 
         // check submit and hover for data-f-ajaxify elems
         delegate(document, '[data-f-ajaxify]', 'submit', Frontal.handleEvent.bind(this));
+
+        this.catchUp();
+    }
+
+    /**
+     * @description Get elements with data-f-register="URL"
+     *              and "ajaxifies" the URL
+     */
+    catchUp() {
+        document.querySelectorAll('[data-f-register]').forEach(node => {
+            Frontal.ajaxify(node.dataset.fRegister, node, node.dataset.fMethod);
+        });
     }
 
     /**
