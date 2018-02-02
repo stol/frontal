@@ -48,7 +48,7 @@ export class Frontal {
         delegate(document, '[data-f-ajaxify]', 'submit', Frontal.handleEvent.bind(this));
         delegate(document, '[data-f-ajaxify]', 'mouseenter', Frontal.handleEvent.bind(this));
 
-        this.catchUp();
+        Frontal.catchUp();
     }
 
     /**
