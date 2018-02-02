@@ -55,7 +55,7 @@ export class Frontal {
      * @description Get elements with data-f-register="URL"
      *              and "ajaxifies" the URL
      */
-    catchUp() {
+    static catchUp() {
         document.querySelectorAll('[data-f-register]').forEach(node => {
             Frontal.ajaxify(node.dataset.fRegister, node, node.dataset.fMethod);
         });
