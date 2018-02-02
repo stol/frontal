@@ -1,6 +1,18 @@
 /**
  * @param {Node}   element
  * @param {String} eventName
+ *
+ */
+export function trigger(element, eventName) {
+    const event = document.createEvent('HTMLEvents');
+    event.initEvent(eventName, true, false);
+    element.dispatchEvent(event);
+};
+
+
+/**
+ * @param {Node}   element
+ * @param {String} eventName
  * @param {Object} data
  *
  */

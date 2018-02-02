@@ -1,6 +1,6 @@
 const delegate = require('delegate');
 
-import { triggerCustomEvent } from './utils/event';
+import { trigger, triggerCustomEvent } from './utils/event';
 
 /**
  * frontal.js 1.0.0
@@ -46,6 +46,7 @@ export class Frontal {
 
         // check submit and hover for data-f-ajaxify elems
         delegate(document, '[data-f-ajaxify]', 'submit', Frontal.handleEvent.bind(this));
+        delegate(document, '[data-f-ajaxify]', 'mouseenter', Frontal.handleEvent.bind(this));
 
         this.catchUp();
     }
@@ -65,16 +66,22 @@ export class Frontal {
      *              Event target is :
      *                - if event is click : anything but a form
      *                - if event is submit : a form
+     *                - if event is mouseenter : anything
      *
      * @param {Object} event
      *
-     * @listens click|submit
+     * @listens click|mousenter|submit
      */
     static handleEvent(event) {
 
         // It's a button, and not inside a form[data-f-ajaxify], do nothing
         if (event.target.matches('[type="submit"]')
             && !event.target.closest('form[data-f-ajaxify]')) {
+            return;
+        }
+
+        // If event is a mouseenter, but there is not hover directive, do nothing
+        if (event.type === "mouseenter" && !event.target.dataset.fHover){
             return;
         }
 
@@ -195,6 +202,8 @@ export class Frontal {
             event.target.querySelector('.js-injected').remove();
 
             event.target.classList.remove('js-loading');
+
+             event.type === "mouseenter" && trigger(event.target, 'mouseenter');
         };
 
         // Finaly, cancel default form submit, so frontal can handle it
