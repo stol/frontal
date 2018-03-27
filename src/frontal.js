@@ -260,7 +260,7 @@
                 }
             }
 
-            $(document).trigger("contentchange");
+            $(document).trigger("contentchange", $elem);
             return;
 
         }
