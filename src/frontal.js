@@ -1,5 +1,5 @@
 /**
- * frontal.js 0.6.2
+ * frontal.js 0.6.4
  *
  * The MIT License (MIT)
  * 
