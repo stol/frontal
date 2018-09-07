@@ -122,9 +122,6 @@ I used frontal.js for several years in various projects. It did remove many java
 <script>frontal.listen();</script>
 ```
 
-```js
-```
-
 ###### ES6
 
 ```js
@@ -135,6 +132,61 @@ import { frontal } from 'frontal';
 const frontal = require('frontal');
 
 frontal.listen();
+```
+
+### Callbacks
+
+After success XHR, you will receive response looking like this :
+
+```json
+{
+  "success": true,
+  "actions": [
+    {
+      "selector": ".selector",
+      "method": "html",
+      "args": [
+        "<h1>Awesome title</h1>"
+      ]
+    },
+    {
+      "selector": null,
+      "method": "doSomething",
+      "args": []
+    }
+  ]
+}
+```
+
+Each method property in actions item will be call as function:
+
+###### jQuery
+
+In this mode, each custom jQuery function are handled, like html, after, prepend, etc ...
+You can also declare custom callbacks, like this :
+
+```js
+$.fn.doSomething = function() {
+    alert('Best function ever !');
+}:
+```
+
+###### ES6
+
+You must declare a global object FrontalCallbacks, who contains yours callbacks:
+
+```js
+const FrontalCallbacks = {
+
+    html : function(str) {
+        this && (this.innerHTML = str);
+    },
+
+    doSomething: function() {
+        alert('Best function ever !');
+    }
+
+};
 ```
 
 ### Click
