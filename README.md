@@ -122,7 +122,7 @@ I used frontal.js for several years in various projects. It did remove many java
 <script>frontal.listen();</script>
 ```
 
-###### ES6
+###### NATIVE
 
 ```js
 import { frontal } from 'frontal';
@@ -171,7 +171,7 @@ $.fn.doSomething = function() {
 }:
 ```
 
-###### ES6
+###### NATIVE
 
 You must declare a global object FrontalCallbacks, who contains yours callbacks:
 
