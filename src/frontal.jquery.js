@@ -1,20 +1,20 @@
 /**
- * frontal.js 0.6.4
+ * frontal.js 1.0.0
  *
  * The MIT License (MIT)
- * 
+ *
  * Copyright (c) 2014 github.com/Stol
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -31,7 +31,7 @@
             loadingFrame = 1,
             settings = {};
 
-        function listen(options){ 
+        function listen(options){
             $(document)
                 // check click for anything with data-f-hover, or submit button
                 .on("click", "[data-f-ajaxify]:not(form), [type=submit]", handleEvent)
@@ -55,11 +55,11 @@
 
         /**
          * Click/hover/submit handler
-         * Event target is : 
+         * Event target is :
          *     - if event is click : anything but a form
          *     - if event is submit : a form
          *     - if event is mouseenter : anything
-         */ 
+         */
         function handleEvent(e)
         {
             var elem  = e.currentTarget,
@@ -70,7 +70,7 @@
                 return;
             }
 
-            // If event is a mouseenter, but there is not hover directive, do nothing 
+            // If event is a mouseenter, but there is not hover directive, do nothing
             if (e.type == "mouseenter" && !$elem.attr("data-f-hover")){
                 return;
             }
@@ -86,7 +86,7 @@
                 $form   = null,
                 method  = $elem.attr("data-f-method") || null,
                 e_type  = e.type;
-            
+
             // A submit button/input has been clicked ? Let's find the relative form
             if ($elem.is("[type=submit]")) {
                 $form   = $elem.closest("form[data-f-ajaxify]");
@@ -157,11 +157,11 @@
             else {
                 data = {__ajax__: 1};
             }
-            
+
             // Ajax call settings
             var ajax_settings = {
                 url: href,
-                type: method,   
+                type: method,
                 data: data,
                 xhrFields: {
                     withCredentials: true
@@ -183,7 +183,7 @@
                 callback_common(response);
             };
 
-            // Callback when the call has server error 
+            // Callback when the call has server error
             var callback_fail = function(jqXHR) {
                 var response = jqXHR.responseJSON;
                 handleResponse(response, $elem);
@@ -209,15 +209,15 @@
         }
 
         /**
-         * Server responses handler 
+         * Server responses handler
          */
         function handleResponse(response, $elem) {
             $elem = $elem || null;
 
             if (typeof response == "string")
                 response = JSON.parse(response);
-            
-            if (typeof response.actions == "undefined") 
+
+            if (typeof response.actions == "undefined")
                 return;
 
             var actions = $.isArray(response.actions) ? response.actions : [response.actions];
@@ -273,7 +273,7 @@
             method = method || 'get';
             return $.ajax({
                 url: url,
-                type: method,   
+                type: method,
                 xhrFields: {
                     withCredentials: true
                 }
@@ -295,7 +295,7 @@
                 clearInterval(loadingTimer);
                 $loading.show();
                 loadingTimer = setInterval(function() {
-                
+
                 if (!$loading.is(':visible')){
                     clearInterval(loadingTimer);
                     return;

@@ -113,6 +113,82 @@ I used frontal.js for several years in various projects. It did remove many java
 
 ## How it works
 
+### Setup
+
+###### jQuery
+
+```html
+<script src="frontal.jquery.js"></script>
+<script>frontal.listen();</script>
+```
+
+###### NATIVE
+
+```js
+import { frontal } from 'frontal';
+
+# OR
+
+const frontal = require('frontal');
+
+frontal.listen();
+```
+
+### Callbacks
+
+After success XHR, you will receive response looking like this :
+
+```json
+{
+  "success": true,
+  "actions": [
+    {
+      "selector": ".selector",
+      "method": "html",
+      "args": [
+        "<h1>Awesome title</h1>"
+      ]
+    },
+    {
+      "selector": null,
+      "method": "doSomething",
+      "args": []
+    }
+  ]
+}
+```
+
+Each method property in actions item will be call as function:
+
+###### jQuery
+
+In this mode, each custom jQuery function are handled, like html, after, prepend, etc ...
+You can also declare custom callbacks, like this :
+
+```js
+$.fn.doSomething = function() {
+    alert('Best function ever !');
+}:
+```
+
+###### NATIVE
+
+You must declare a global object FrontalCallbacks, who contains yours callbacks:
+
+```js
+const FrontalCallbacks = {
+
+    html : function(str) {
+        this && (this.innerHTML = str);
+    },
+
+    doSomething: function() {
+        alert('Best function ever !');
+    }
+
+};
+```
+
 ### Click
 
 When clicking on any element, frontal is triggered IF data-f-ajaxify is present.
@@ -189,7 +265,11 @@ Clone this repository, then navigate to /frontal/web/
 * Make tests
 
 ### Changelog
-0.6 : added data-f-register
 
-------- 
-frontal.js is licensed under the [MIT license](http://opensource.org/licenses/MIT). 
+* 1.0.0: add native version
+* 0.6.4: contentchange event now send element triggered
+* 0.6.3: ajaxify() > return deferred
+* 0.6 : added data-f-register
+
+-------
+frontal.js is licensed under the [MIT license](http://opensource.org/licenses/MIT).

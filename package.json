@@ -1,9 +1,14 @@
 {
     "name": "frontal",
-    "version": "0.6.4",
+    "version": "1.0.0",
+    "scripts": {
+        "build": "node_modules/webpack/bin/webpack.js"
+    },
     "devDependencies": {
-        "grunt": "0.4.2",
-        "grunt-contrib-jshint": "0.7.2",
-        "grunt-contrib-uglify": "0.2.7"
+        "babel-core": "^6.26.0",
+        "babel-loader": "^7.1.2",
+        "babel-preset-env": "^1.6.1",
+        "delegate": "^3.2.0",
+        "webpack": "^3.10.0"
     }
 }
