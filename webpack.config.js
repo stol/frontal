@@ -1,48 +1,39 @@
 /* eslint-env node */
 
-module.exports = env => {
+const webpack = require('webpack');
 
-    const webpack = require('webpack');
+module.exports = {
 
-    const isDev = env.dev === true;
+    entry : {
+        'dist/frontal.jquery.js' : __dirname + '/src/frontal.jquery.js',
+        'dist/frontal.native.js' : __dirname + '/src/frontal.native.js'
+    },
 
-    let webpackConfig = {
+    output: {
+        filename      : '[name]',
+        libraryTarget : 'window'
+    },
 
-        entry : {
-            'dist/frontal.js' : __dirname + '/src/frontal.js'
-        },
+    resolve: {
+        extensions: ['.js']
+    },
 
-        output: {
-            filename      : '[name]',
-            libraryTarget : 'window'
-        },
+    plugins: [
+       new webpack.optimize.UglifyJsPlugin({minimize: true}),
+    ],
 
-        resolve: {
-            extensions: ['.js']
-        },
+    externals: {
+        jquery: 'jQuery'
+    },
 
-        module: {
-            loaders: [{
-                test : /\.js$/,
-                exclude: /node_modules/,
-                loader : 'babel-loader',
-                query: {
-                    presets : ['env']
-                }
-            }]
-        }
+    module: {
+        loaders: [{
+            test : /\.js$/,
+            exclude: /node_modules/,
+            loader : 'babel-loader',
+            query: {
+                presets : ['env']
+            }
+        }]
     }
-
-    if (isDev) {
-
-        webpackConfig.devtool = 'inline-sourcemap';
-    }
-    else {
-
-        webpackConfig.plugins = [
-            new webpack.optimize.UglifyJsPlugin({minimize: true})
-        ];
-    }
-
-    return webpackConfig;
 };

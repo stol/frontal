@@ -2,8 +2,7 @@
     "name": "frontal",
     "version": "1.0.0",
     "scripts": {
-        "build:dev": "node_modules/webpack/bin/webpack.js --env.dev",
-        "build:prod": "node_modules/webpack/bin/webpack.js --env.prod"
+        "build": "node_modules/webpack/bin/webpack.js"
     },
     "devDependencies": {
         "babel-core": "^6.26.0",
