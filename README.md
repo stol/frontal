@@ -213,10 +213,11 @@ Clone this repository, then navigate to /frontal/web/
 * Make tests
 
 ### Changelog
-1.0.0: add native version
-0.6.4: contentchange event now send element triggered
-0.6.3: ajaxify() > return deferred
-0.6 : added data-f-register
+
+* 1.0.0: add native version
+* 0.6.4: contentchange event now send element triggered
+* 0.6.3: ajaxify() > return deferred
+* 0.6 : added data-f-register
 
 -------
 frontal.js is licensed under the [MIT license](http://opensource.org/licenses/MIT).
