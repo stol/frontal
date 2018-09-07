@@ -119,7 +119,7 @@ I used frontal.js for several years in various projects. It did remove many java
 
 ```html
 <script src="frontal.jquery.js"></script>
-<script>frontal.listens();</script>
+<script>frontal.listen();</script>
 ```
 
 ```js
