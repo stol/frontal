@@ -1,7 +1,3 @@
-const delegate = require('delegate');
-
-import { trigger, triggerCustomEvent } from './utils/event';
-
 /**
  * frontal.js 1.0.0
  *
@@ -28,11 +24,10 @@ import { trigger, triggerCustomEvent } from './utils/event';
  * THE SOFTWARE.
  */
 
- /**
-  *
-  * @class Frontal
-  * @version 1.0.0
-  */
+const delegate = require('delegate');
+
+import { trigger, triggerCustomEvent } from './utils/event';
+
 export class Frontal {
 
     /**
@@ -81,7 +76,7 @@ export class Frontal {
         }
 
         // If event is a mouseenter, but there is not hover directive, do nothing
-        if (event.type === "mouseenter" && !event.target.dataset.fHover){
+        if (event.type === "mouseenter" && !event.target.dataset.fHover) {
             return;
         }
 
@@ -203,7 +198,7 @@ export class Frontal {
 
             event.target.classList.remove('js-loading');
 
-             event.type === "mouseenter" && trigger(event.target, 'mouseenter');
+            event.type === "mouseenter" && trigger(event.target, 'mouseenter');
         };
 
         // Finaly, cancel default form submit, so frontal can handle it
@@ -223,6 +218,8 @@ export class Frontal {
             xhr.onerror = () => {
                 reject(xhr);
             };
+
+            data.append('__ajax__', 1);
 
             xhr.send(data);
         })

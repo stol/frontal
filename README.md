@@ -113,6 +113,30 @@ I used frontal.js for several years in various projects. It did remove many java
 
 ## How it works
 
+### Setup
+
+###### jQuery
+
+```html
+<script src="frontal.jquery.js"></script>
+<script>frontal.listens();</script>
+```
+
+```js
+```
+
+###### ES6
+
+```js
+import { frontal } from 'frontal';
+
+# OR
+
+const frontal = require('frontal');
+
+frontal.listen();
+```
+
 ### Click
 
 When clicking on any element, frontal is triggered IF data-f-ajaxify is present.
@@ -189,7 +213,10 @@ Clone this repository, then navigate to /frontal/web/
 * Make tests
 
 ### Changelog
+1.0.0: add native version
+0.6.4: contentchange event now send element triggered
+0.6.3: ajaxify() > return deferred
 0.6 : added data-f-register
 
-------- 
-frontal.js is licensed under the [MIT license](http://opensource.org/licenses/MIT). 
+-------
+frontal.js is licensed under the [MIT license](http://opensource.org/licenses/MIT).
