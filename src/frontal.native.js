@@ -28,6 +28,9 @@ const delegate = require('delegate');
 
 import { trigger, triggerCustomEvent } from './utils/event';
 
+// Global objects who will contains XHR callbacks by the client.
+window.FrontalCallbacks = window.FrontalCallbacks || {};
+
 export class Frontal {
 
     /**
