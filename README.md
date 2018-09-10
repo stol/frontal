@@ -266,6 +266,7 @@ Clone this repository, then navigate to /frontal/web/
 
 ### Changelog
 
+* 1.0.1: XHR response > fix data returned.
 * 1.0.0: add native version
 * 0.6.4: contentchange event now send element triggered
 * 0.6.3: ajaxify() > return deferred

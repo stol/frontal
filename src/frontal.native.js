@@ -1,5 +1,5 @@
 /**
- * frontal.js 1.0.0
+ * frontal.js 1.0.1
  *
  * The MIT License (MIT)
  *
@@ -158,7 +158,7 @@ export class Frontal {
         // Set the state to 0, so the action won't be executed twice
         event.target.dataset.fAjaxify = 0;
 
-        let data = {};
+        let data = new FormData;
 
         // Retrieve data to be sent to the server
         if (event.target.matches('form')) {
@@ -184,10 +184,8 @@ export class Frontal {
 
         // Callback when the call has server error
         const callbackFail = xhr => {
-
-            Frontal.handleResponse(xhr.responseJSON, event.target);
-
-            callbackCommon(xhr.responseJSON);
+            Frontal.handleResponse(xhr.responseText, event.target);
+            callbackCommon(xhr);
         };
 
         // Callback in any case, success or error
@@ -228,7 +226,7 @@ export class Frontal {
         })
         .then(callbackDone)
         .catch(callbackFail)
-        .then(callbackAlways);
+        .finally(callbackAlways);
     }
 
     /**
@@ -266,7 +264,6 @@ export class Frontal {
             }
 
             if (typeof FrontalCallbacks[action.method] !== 'undefined') {
-
                 query = FrontalCallbacks[action.method].apply(query, action.args);
             }
         }
@@ -306,7 +303,9 @@ export class Frontal {
         })
         .then(response => {
 
-            Frontal.handleResponse(response.statusText, node);
+            Frontal.handleResponse(response.responseText, node);
+
+            return response;
         });
     }
 }
