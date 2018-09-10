@@ -1,6 +1,6 @@
 {
     "name": "frontal",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "scripts": {
         "build": "node_modules/webpack/bin/webpack.js"
     },
