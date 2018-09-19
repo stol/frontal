@@ -1,5 +1,5 @@
 /**
- * frontal.js 1.0.1
+ * frontal.js 1.0.2
  *
  * The MIT License (MIT)
  *
@@ -135,8 +135,8 @@ export class Frontal {
             let input = document.createElement('input');
             input.type = 'hidden';
             input.classList.add('js-injected');
-            input.name = node.name;
-            input.value = node.value;
+            input.name = event.target.name;
+            input.value = event.target.value;
 
             form.appendChild(input);
 
